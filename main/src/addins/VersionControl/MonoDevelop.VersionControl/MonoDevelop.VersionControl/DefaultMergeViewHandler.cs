@@ -36,7 +36,8 @@ namespace MonoDevelop.VersionControl
 		public bool CanHandle (VersionControlItem item, DocumentView primaryView)
 		{
 			return (primaryView == null || primaryView.GetContent <ITextFile> () != null)
-				&& item.Repository.GetFileIsText (item.Path);
+				&& item.Repository.GetFileIsText (item.Path) 
+				&& item.VersionInfo.Status.HasFlag (VersionStatus.Conflicted);
 		}
 
 		public BaseViewContent CreateView (VersionControlDocumentInfo info)
